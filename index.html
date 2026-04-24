@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel Giovinazzo, MD PhD — Psychiatry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF6F1;
+      --cream-mid: #F3EDE4;
+      --tan: #E8DDD1;
+      --terra: #C9956A;
+      --terra-deep: #A8724A;
+      --brown: #6B4A30;
+      --brown-dark: #3D2316;
+      --text: #3D2B1F;
+      --text-mid: #7A5C47;
+      --text-light: #A8896E;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', Helvetica, sans-serif;
+      --nav-bg: rgba(250, 246, 241, 0.95);
+    }
+
+    html.dark {
+      --cream: #1C1612;
+      --cream-mid: #242018;
+      --tan: #35291E;
+      --terra: #C9956A;
+      --terra-deep: #D4A87A;
+      --brown: #8C6A4A;
+      --brown-dark: #0E0B08;
+      --text: #EDE4D8;
+      --text-mid: #B89880;
+      --text-light: #7A6250;
+      --nav-bg: rgba(28, 22, 18, 0.95);
+    }
+
+    html.dark nav {
+      background: var(--nav-bg);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--tan);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4rem;
+      height: 72px;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      cursor: pointer;
+    }
+    .nav-logo span { color: var(--terra); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--terra); }
+    .dark-toggle {
+      background: none;
+      border: 1px solid var(--tan);
+      color: var(--text-mid);
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .dark-toggle:hover { border-color: var(--terra); color: var(--terra); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-cta {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--terra);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--terra-deep); }
+
+    /* PAGES */
+    .page { min-height: 100vh; padding-top: 72px; }
+
+    /* HOME */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 72px);
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 5rem 6rem 6rem;
+      background: var(--cream);
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: 3.8rem;
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    .hero-title em { font-style: italic; color: var(--terra-deep); }
+    .hero-body {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      max-width: 440px;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; }
+    .btn-primary {
+      background: var(--terra);
+      color: white;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--terra-deep); }
+    .btn-ghost {
+      background: none;
+      color: var(--text-mid);
+      border: 1px solid var(--tan);
+      padding: 0.9rem 2.2rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--terra); color: var(--terra); }
+    .hero-right {
+      background: var(--cream-mid);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+      background: repeating-linear-gradient(
+        45deg,
+        var(--cream-mid) 0px, var(--cream-mid) 12px,
+        var(--tan) 12px, var(--tan) 13px
+      );
+    }
+    .hero-photo-placeholder p {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: monospace;
+      background: var(--cream);
+      padding: 0.4rem 1rem;
+    }
+    .hero-badges {
+      position: absolute; bottom: 2.5rem; left: 2.5rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .badge {
+      background: rgba(250, 246, 241, 0.92);
+      border: 1px solid var(--tan);
+      padding: 0.5rem 1rem;
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(4px);
+    }
+
+    /* HOME FEATURES */
+    .home-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--tan);
+    }
+    .feature-card {
+      padding: 3.5rem 3rem;
+      border-right: 1px solid var(--tan);
+    }
+    .feature-card:last-child { border-right: none; }
+    .feature-number {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      color: var(--terra);
+      opacity: 0.4;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .feature-title {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+    }
+    .feature-body {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+
+    /* HOME NOTICE */
+    .home-notice {
+      background: var(--cream-mid);
+      border-top: 1px solid var(--tan);
+      padding: 3rem 6rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .notice-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terra);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .notice-divider {
+      width: 40px; height: 1px;
+      background: var(--terra);
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+    .notice-text {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    /* SECTION SHELLS */
+    .section-header {
+      padding: 6rem 6rem 3rem;
+      border-bottom: 1px solid var(--tan);
+    }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      line-height: 1.2;
+      max-width: 600px;
+    }
+    .section-title em { font-style: italic; color: var(--terra-deep); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      min-height: 60vh;
+    }
+    .about-photo-col {
+      border-right: 1px solid var(--tan);
+      background: var(--cream-mid);
+      min-height: 500px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .photo-placeholder {
+      width: 100%; height: 100%; min-height: 500px;
+      background: repeating-linear-gradient(
+        45deg,
+        var(--cream-mid) 0px, var(--cream-mid) 12px,
+        var(--tan) 12px, var(--tan) 13px
+      );
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .photo-placeholder p {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: monospace;
+      background: var(--cream);
+      padding: 0.35rem 0.9rem;
+    }
+    .about-bio-col {
+      padding: 5rem 5rem 5rem 5rem;
+    }
+    .about-bio-col h3 {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    .about-bio-col p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+    }
+    .about-bio-col a.paper-link {
+      color: var(--terra);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .about-creds {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-top: 2rem;
+    }
+    .cred-tag {
+      border: 1px solid var(--tan);
+      padding: 0.35rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      letter-spacing: 0.04em;
+    }
+    .philosophy-section {
+      background: var(--cream-mid);
+      border-top: 1px solid var(--tan);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+    .philosophy-label {
+      padding: 4rem 3rem;
+      border-right: 1px solid var(--tan);
+    }
+    .philosophy-label h4 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .philosophy-body {
+      padding: 4rem 5rem;
+    }
+    .philosophy-body p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+    }
+
+    /* SERVICES */
+    .services-list { }
+    .service-row {
+      display: grid;
+      grid-template-columns: 280px 1fr 200px;
+      align-items: start;
+      padding: 4rem 6rem;
+      border-bottom: 1px solid var(--tan);
+      gap: 4rem;
+      transition: background 0.2s;
+    }
+    .service-row:hover { background: var(--cream-mid); }
+    .service-row-num {
+      font-family: var(--serif);
+      font-size: 3rem;
+      color: var(--terra);
+      opacity: 0.3;
+      line-height: 1;
+      margin-top: 0.2rem;
+    }
+    .service-row-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .service-row-duration {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1.2rem;
+      border: 1px solid currentColor;
+      padding: 0.2rem 0.7rem;
+    }
+    .service-row-body {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+    .service-row-fee-col {
+      text-align: right;
+      padding-top: 0.4rem;
+    }
+    .service-fee-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .service-fee {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--terra-deep);
+    }
+    .service-fee small {
+      font-size: 0.8rem;
+      display: block;
+      color: var(--text-light);
+      margin-top: 0.15rem;
+      font-family: var(--sans);
+    }
+    .services-superbill {
+      background: var(--brown-dark);
+      color: var(--cream);
+      padding: 3.5rem 6rem;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+    .superbill-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .superbill-icon svg { opacity: 0.7; }
+    .services-superbill h4 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      color: #FAF6F1;
+    }
+    .services-superbill p {
+      font-size: 0.88rem;
+      color: rgba(250,246,241,0.65);
+      line-height: 1.7;
+    }
+
+    /* FAQ */
+    .faq-list { padding: 0 6rem; }
+    .faq-item {
+      border-bottom: 1px solid var(--tan);
+      cursor: pointer;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 0;
+      gap: 2rem;
+    }
+    .faq-question h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+    .faq-toggle {
+      width: 32px; height: 32px; flex-shrink: 0;
+      border: 1px solid var(--tan);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      color: var(--terra);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .faq-item.open .faq-toggle { background: var(--terra); color: white; border-color: var(--terra); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0 2rem;
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+    .faq-answer-inner a { color: var(--terra); }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .contact-info-col {
+      padding: 5rem 5rem 5rem 6rem;
+      border-right: 1px solid var(--tan);
+    }
+    .contact-info-col h3 {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 3rem;
+    }
+    .contact-item {
+      margin-bottom: 2.5rem;
+    }
+    .contact-item-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 0.5rem;
+    }
+    .contact-item-value {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .contact-item-value a { color: inherit; text-decoration: none; }
+    .contact-item-value a:hover { color: var(--terra); }
+    .contact-map-col {
+      background: var(--cream-mid);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 400px;
+      background: repeating-linear-gradient(
+        45deg,
+        var(--cream-mid) 0px, var(--cream-mid) 12px,
+        var(--tan) 12px, var(--tan) 13px
+      );
+    }
+    .contact-map-placeholder {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.5rem;
+    }
+    .contact-map-placeholder p {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: monospace;
+      background: var(--cream);
+      padding: 0.35rem 0.9rem;
+    }
+    .contact-hours {
+      border-top: 1px solid var(--tan);
+      padding: 3.5rem 6rem;
+      background: var(--cream-mid);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-hours h4 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+    .hours-note {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    /* APPOINTMENTS FORM */
+    .appt-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+    }
+    .appt-sidebar {
+      padding: 5rem 3.5rem 5rem 6rem;
+      border-right: 1px solid var(--tan);
+    }
+    .appt-sidebar h3 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+    .appt-sidebar p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .appt-sidebar .note-box {
+      margin-top: 2rem;
+      border-left: 2px solid var(--terra);
+      padding: 1rem 1.25rem;
+      background: var(--cream-mid);
+    }
+    .appt-sidebar .note-box p {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      margin: 0;
+    }
+    .appt-form-col {
+      padding: 5rem 6rem 5rem 5rem;
+    }
+    .form-section {
+      margin-bottom: 3rem;
+    }
+    .form-section-title {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--tan);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-row.single { grid-template-columns: 1fr; }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-group label {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1px solid var(--tan);
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.92rem;
+      font-weight: 300;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--terra);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A8896E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .checkbox-group {
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .checkbox-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      cursor: pointer;
+    }
+    .checkbox-item input[type="checkbox"] {
+      width: 16px; height: 16px;
+      border: 1px solid var(--tan);
+      accent-color: var(--terra);
+      cursor: pointer;
+      padding: 0;
+    }
+    .checkbox-item label {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      text-transform: none;
+      letter-spacing: 0;
+      cursor: pointer;
+    }
+    .form-submit {
+      margin-top: 2.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      align-items: flex-start;
+    }
+    .form-submit p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    .submit-success {
+      display: none;
+      background: var(--cream-mid);
+      border: 1px solid var(--tan);
+      border-left: 3px solid var(--terra);
+      padding: 1.5rem 2rem;
+      margin-top: 1rem;
+    }
+    .submit-success.visible { display: block; }
+    .submit-success h4 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+    .submit-success p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--brown-dark);
+      color: var(--cream);
+      padding: 4rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    footer h5 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: var(--terra);
+    }
+    footer p, footer a {
+      font-size: 0.83rem;
+      color: rgba(250,246,241,0.55);
+      line-height: 1.8;
+      text-decoration: none;
+      display: block;
+    }
+    footer a:hover { color: var(--terra); }
+    .footer-bottom {
+      background: var(--brown-dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.25rem 6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: rgba(250,246,241,0.3);
+    }
+
+    /* TWEAKS PANEL */
+    .tweaks-panel {
+      position: fixed;
+      bottom: 1.5rem; right: 1.5rem;
+      width: 240px;
+      background: var(--cream);
+      border: 1px solid var(--tan);
+      box-shadow: 0 8px 32px rgba(61,35,22,0.12);
+      z-index: 999;
+      padding: 1.25rem;
+      display: none;
+    }
+    .tweaks-panel.visible { display: block; }
+    .tweaks-panel h5 {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1rem;
+    }
+    .tweak-item { margin-bottom: 1rem; }
+    .tweak-item label {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .tweak-item select, .tweak-item input[type=range] {
+      width: 100%;
+      border: 1px solid var(--tan);
+      background: var(--cream);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      padding: 0.35rem 0.5rem;
+      outline: none;
+      border-radius: 0;
+      color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .home-features { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .services-list .service-row { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 1rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .appt-grid { grid-template-columns: 1fr; }
+      .section-header, .faq-list, footer, .footer-bottom { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .contact-info-col { padding: 3rem 1.5rem; }
+      .appt-form-col { padding: 2rem 1.5rem; }
+      .appt-sidebar { padding: 2rem 1.5rem; }
+      .hero-left { padding: 4rem 1.5rem; }
+      .services-superbill { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "fontStyle": "slab",
+  "accentColor": "terra",
+  "density": "comfortable"
+}/*EDITMODE-END*/;
+
+const { useState, useEffect, useRef } = React;
+
+// ─── TRANSLATIONS ─────────────────────────────────────────────────────────────
+
+const CONTENT = {
+  en: {
+    nav: { home:'Home', about:'About', services:'Services', faq:'FAQ', contact:'Contact', cta:'Request Appointment' },
+    home: {
+      eyebrow: 'Psychiatry · Washington State',
+      title: 'Thoughtful care for your mental health',
+      body: 'Medication management rooted in evidence-based medicine, compassion, and a genuine partnership with you. Serving adults in Washington State, in-person and via telehealth.',
+      cta: 'Request Appointment', aboutBtn: 'About Dr. Giovinazzo',
+      badge1: 'MD PhD · Johns Hopkins School of Medicine', badge2: 'Psychiatry Residency · University of Washington',
+      f1title: 'Evidence-Based', f1body: 'Trained in neuroscience and medicine at Johns Hopkins, I bring a rigorous, research-informed approach to every treatment decision.',
+      f2title: 'Patient-Centered', f2body: 'Your values, preferences, and life circumstances are central to any plan we develop together. This is a partnership.',
+      f3title: 'Holistic', f3body: "Medication is one tool among many. When appropriate, I'll collaborate with therapists and help you find the right combination of care.",
+      noticeLabel: 'Cash-Pay Practice',
+      noticeText: 'This practice does not bill insurance directly. Detailed superbills are provided so you can seek out-of-network reimbursement from your insurer.',
+      learnMore: 'Learn more →',
+      spanishBadge: 'Services available in Spanish · Servicios disponibles en español',
+    },
+    about: {
+      eyebrow: 'About', sectionTitle: 'Daniel Giovinazzo, MD PhD',
+      bgTitle: 'Background',
+      p1: 'I was born and raised in Miami, FL and come from a family of immigrants. Much of my early adult life was spent in Baltimore, MD. These experiences have exposed me to diverse ways of life and cultures, and I hope my approach reflects that — centered on compassion and humility.',
+      p2: 'I graduated from Johns Hopkins University with a degree in Neuroscience and completed both medical school training (MD) and scientific research training (PhD in Neuroscience) at the Johns Hopkins School of Medicine. I went on to complete my psychiatry residency at the University of Washington.',
+      p3: "These experiences helped shape me into the clinician I am today and emphasized the importance of understanding patients' lived experiences while applying the body of medical and scientific knowledge to the challenges they face.",
+      p4: 'As part of my PhD training, I conducted basic science research into the underpinnings of Alzheimer\'s dementia — work I hope may eventually contribute to new treatments for this disease. That training also gave me the tools to critically read and appraise the medical literature, a skill I believe is invaluable in evidence-based psychiatric practice.',
+      paperLink: 'Download research paper →',
+      creds: ['BS Neuroscience · Johns Hopkins University','MD · Johns Hopkins School of Medicine','PhD Neuroscience · Johns Hopkins School of Medicine','Psychiatry Residency · University of Washington','Licensed in Washington State'],
+      philLabel: 'Treatment Philosophy',
+      phil1: 'I provide medication management with a holistic, patient-centered stance. My aim is to form a genuine partnership in deciding the treatment options that make the most sense for your life — not just your symptoms.',
+      phil2: 'I strive to stay up to date on the latest clinical trials and evidence base for treatment options, and I believe an important part of my role is helping interpret that research in ways that are meaningful and actionable for you.',
+      phil3: "While I don't offer formal psychotherapy, I believe strongly in the value of tackling mental health from multiple angles. When indicated, I will refer you to therapy and actively help identify the style of therapy and available options that best fit your needs and situation.",
+      phil4: 'I also offer a one-time consultation visit for patients seeking diagnostic clarification or a second opinion on their current treatment.',
+    },
+    services: {
+      eyebrow: 'Services', sectionTitle: 'What I offer',
+      spanishNote: 'All services are available in Spanish · Todos los servicios están disponibles en español',
+      s1title: 'Initial Appointment', s1duration: '1.5 hours',
+      s1body: 'Our first meeting is dedicated to getting to know you as a person — your history, current challenges, prior treatment experiences, and your goals. We\'ll develop a working diagnosis together and discuss a treatment plan that may include medication, therapy, or a combination. I aim to ensure you leave feeling heard and with a clear path forward.',
+      s2title: 'Follow-Up Appointment', s2d1: '25 min', s2d2: '55 min',
+      s2body: "Follow-up visits focus on how you're responding to treatment — reviewing symptom changes, medication tolerability, and adjusting the plan as needed. I offer two session lengths to give you the flexibility to choose what works best for your needs and schedule. Both formats allow for meaningful conversation and thoughtful care.",
+      s3title: 'Second Opinion Consultation', s3duration: 'One-time visit',
+      s3body: "A single consultation for patients who are seeking clarity on a diagnosis, want another perspective on their current treatment, or are navigating a complex clinical picture. I'll review your history and provide an independent assessment and recommendations. This visit does not establish an ongoing treatment relationship but can be a valuable step in your care.",
+      feeLabel: 'Fee', cashCard: 'Cash / card', perSession: 'Per session', oneTime: 'One-time',
+      superbillTitle: 'Superbills provided for all visits',
+      superbillBody: 'This is a cash-pay practice. After each visit, I provide a detailed superbill with all necessary codes (ICD-10, CPT, NPI) so you can submit to your insurance company for potential out-of-network reimbursement. Many PPO plan holders receive partial reimbursement. Contact your insurer to learn about your out-of-network mental health benefits.',
+    },
+    faq: { eyebrow: 'FAQ', sectionTitle: 'Common questions' },
+    contact: {
+      eyebrow: 'Contact', sectionTitle: 'Get in touch', infoTitle: 'Contact Information',
+      phoneLabel: 'Phone', emailLabel: 'Email', addressLabel: 'Address',
+      addressValue: 'Physical location in Kenmore, WA coming soon',
+      telehealthLabel: 'Telehealth', telehealthValue: 'Available for patients in Washington State',
+      faxLabel: 'Fax', availTitle: 'Availability',
+      availP1: 'Please reach out by phone or email for scheduling inquiries. I typically respond within 1–2 business days. For non-urgent questions, the appointment request form is the best way to get in touch.',
+      availP2: 'This practice is not able to provide emergency or crisis services. If you are in crisis, please call or text 988 (Suicide & Crisis Lifeline) or go to your nearest emergency room.',
+      mapPlaceholder: 'Map / office photo',
+    },
+    appointments: {
+      eyebrow: 'New Patients', sectionTitle: 'Request an appointment',
+      sidebarTitle: 'Before you reach out',
+      sidebarP1: "Please complete this form so I can learn a bit about you before we connect. I'll review your information and follow up within a few business days.",
+      sidebarP2: 'This form is for new patient inquiries only. Existing patients should contact me directly by phone or email.',
+      noteStrong: 'Cash-pay practice.', noteBody: 'I do not bill insurance directly but provide superbills for out-of-network reimbursement. See the FAQ for details.',
+      receivedTitle: 'Request received', receivedBody: "Thank you — I'll be in touch within a few business days.",
+      thankYou: 'Thank you.',
+      thankYouBody: "Your request has been received. I'll review your information and reach out within a few business days to discuss next steps.",
+      personalTitle: 'Personal Information',
+      firstNameLabel: 'First Name', lastNameLabel: 'Last Name', phoneLabel: 'Phone', emailLabel: 'Email',
+      preferredContactLabel: 'Preferred Contact', emailOpt: 'Email', phoneOpt: 'Phone', eitherOpt: 'Either',
+      apptTitle: 'Appointment Details', visitPrefLabel: 'Visit Preference',
+      selectOpt: 'Select…', inPersonOpt: 'In-Person', telehealthOpt: 'Telehealth (Washington State only)', noPrefOpt: 'No preference',
+      clinicalTitle: 'What brings you in?',
+      concernLabel: 'Please briefly describe your main concerns *',
+      concernPlaceholder: "Please describe what you're hoping to address…",
+      furtherDetails: 'Further details about your history, current medications, and prior treatment will be requested prior to your first appointment.',
+      ackTitle: 'Acknowledgements',
+      ack1: 'I understand this is a cash-pay practice and I will be responsible for payment at the time of service. Superbills will be provided for insurance reimbursement.',
+      ack2: 'I am 18 years of age or older.',
+      submitNote: 'Submitting this form does not guarantee an appointment. I will review your information and follow up within a few business days to confirm availability and next steps.',
+      submitBtn: 'Submit Request',
+    },
+    footer: {
+      specialty: 'Adult Psychiatry · Medication Management', state: 'Washington State', mode: 'In-person & Telehealth',
+      navigate: 'Navigate', contact: 'Contact',
+      crisis: 'If you are in crisis, please call or text 988 (Suicide & Crisis Lifeline) or go to your nearest emergency room.',
+      copyright: '© 2026 Daniel Giovinazzo, MD PhD, PLLC. All rights reserved.',
+      privacy: 'This site does not collect or store personal health information.',
+      navLabels: { home:'Home', about:'About', services:'Services', faq:'FAQ', contact:'Contact', appointments:'Request Appointment' },
+    },
+  },
+  es: {
+    nav: { home:'Inicio', about:'Sobre mí', services:'Servicios', faq:'Preguntas', contact:'Contacto', cta:'Solicitar cita' },
+    home: {
+      eyebrow: 'Psiquiatría · Estado de Washington',
+      title: 'Atención reflexiva para su salud mental',
+      body: 'Manejo de medicamentos basado en medicina con evidencia científica, compasión y una verdadera asociación con usted. Atendiendo adultos en Washington, en persona y por telesalud.',
+      cta: 'Solicitar cita', aboutBtn: 'Sobre el Dr. Giovinazzo',
+      badge1: 'MD PhD · Escuela de Medicina Johns Hopkins', badge2: 'Residencia en Psiquiatría · Universidad de Washington',
+      f1title: 'Basado en evidencia', f1body: 'Formado en neurociencia y medicina en Johns Hopkins, aplico un enfoque riguroso e informado por la investigación en cada decisión de tratamiento.',
+      f2title: 'Centrado en el paciente', f2body: 'Sus valores, preferencias y circunstancias de vida son fundamentales en cualquier plan que desarrollemos juntos. Esto es una asociación.',
+      f3title: 'Holístico', f3body: 'El medicamento es una herramienta entre muchas. Cuando es apropiado, colaboraré con terapeutas para encontrar la combinación de atención más adecuada para usted.',
+      noticeLabel: 'Práctica de pago directo',
+      noticeText: 'Esta práctica no factura directamente al seguro. Se proporcionan superbills detallados para que pueda solicitar reembolso de su aseguradora.',
+      learnMore: 'Más información →',
+      spanishBadge: 'Servicios disponibles en español · Services available in Spanish',
+    },
+    about: {
+      eyebrow: 'Sobre mí', sectionTitle: 'Daniel Giovinazzo, MD PhD',
+      bgTitle: 'Trayectoria',
+      p1: 'Nací y crecí en Miami, FL, y provengo de una familia de inmigrantes. Gran parte de mi vida adulta temprana la viví en Baltimore, MD. Estas experiencias me expusieron a diversas formas de vida y culturas, y espero que mi enfoque lo refleje: centrado en la compasión y la humildad.',
+      p2: 'Me gradué de la Universidad Johns Hopkins con un título en Neurociencia y completé tanto la formación médica (MD) como la formación en investigación científica (PhD en Neurociencia) en la Escuela de Medicina Johns Hopkins. Posteriormente completé mi residencia en psiquiatría en la Universidad de Washington.',
+      p3: 'Estas experiencias me formaron como el médico que soy hoy y resaltaron la importancia de comprender las experiencias vividas por los pacientes, aplicando el conocimiento médico y científico a los desafíos que enfrentan.',
+      p4: 'Como parte de mi formación doctoral, realicé investigación científica básica sobre los fundamentos de la demencia de Alzheimer, con la esperanza de que eventualmente pueda contribuir a nuevos tratamientos. Esa formación también me dio las herramientas para leer y evaluar críticamente la literatura médica, una habilidad invaluable en la práctica psiquiátrica basada en evidencia.',
+      paperLink: 'Descargar artículo de investigación →',
+      creds: ['BS Neurociencia · Universidad Johns Hopkins','MD · Escuela de Medicina Johns Hopkins','PhD Neurociencia · Escuela de Medicina Johns Hopkins','Residencia en Psiquiatría · Universidad de Washington','Con licencia en el Estado de Washington'],
+      philLabel: 'Filosofía de tratamiento',
+      phil1: 'Ofrezco manejo de medicamentos con una perspectiva holística y centrada en el paciente. Mi objetivo es formar una verdadera asociación para decidir las opciones de tratamiento que tengan más sentido para su vida, no solo para sus síntomas.',
+      phil2: 'Me esfuerzo por mantenerme actualizado sobre los últimos ensayos clínicos y la base de evidencia para las opciones de tratamiento, y creo que una parte importante de mi rol es ayudar a interpretar esa investigación de manera significativa y aplicable para usted.',
+      phil3: 'Aunque no ofrezco psicoterapia formal, creo firmemente en el valor de abordar la salud mental desde múltiples ángulos. Cuando está indicado, lo referiré a terapia y le ayudaré activamente a identificar el estilo de terapia y las opciones disponibles que mejor se adapten a sus necesidades.',
+      phil4: 'También ofrezco una consulta única para pacientes que buscan claridad diagnóstica o una segunda opinión sobre su tratamiento actual.',
+    },
+    services: {
+      eyebrow: 'Servicios', sectionTitle: 'Lo que ofrezco',
+      spanishNote: 'Todos los servicios están disponibles en español · All services available in English',
+      s1title: 'Cita inicial', s1duration: '1.5 horas',
+      s1body: 'Nuestra primera reunión está dedicada a conocerle como persona: su historia, los desafíos actuales, experiencias previas de tratamiento y sus objetivos. Desarrollaremos juntos un diagnóstico de trabajo y discutiremos un plan de tratamiento que puede incluir medicamentos, terapia o una combinación. Mi objetivo es que salga sintiéndose escuchado y con un camino claro a seguir.',
+      s2title: 'Cita de seguimiento', s2d1: '25 min', s2d2: '55 min',
+      s2body: 'Las visitas de seguimiento se enfocan en cómo está respondiendo al tratamiento: revisando cambios en síntomas, tolerancia a los medicamentos y ajustando el plan según sea necesario. Ofrezco dos duraciones de sesión para darle la flexibilidad de elegir lo que mejor funcione para sus necesidades y horario.',
+      s3title: 'Consulta de segunda opinión', s3duration: 'Visita única',
+      s3body: 'Una consulta única para pacientes que buscan claridad sobre un diagnóstico, desean otra perspectiva sobre su tratamiento actual, o están navegando un cuadro clínico complejo. Revisaré su historial y proporcionaré una evaluación y recomendaciones independientes.',
+      feeLabel: 'Tarifa', cashCard: 'Efectivo / tarjeta', perSession: 'Por sesión', oneTime: 'Única vez',
+      superbillTitle: 'Superbills para todas las visitas',
+      superbillBody: 'Esta es una práctica de pago directo. Después de cada visita, proporciono un superbill detallado con todos los códigos necesarios (ICD-10, CPT, NPI) para que pueda enviarlo a su aseguradora y solicitar reembolso fuera de red.',
+    },
+    faq: { eyebrow: 'Preguntas frecuentes', sectionTitle: 'Preguntas comunes' },
+    contact: {
+      eyebrow: 'Contacto', sectionTitle: 'Póngase en contacto', infoTitle: 'Información de contacto',
+      phoneLabel: 'Teléfono', emailLabel: 'Correo electrónico', addressLabel: 'Dirección',
+      addressValue: 'Ubicación física en Kenmore, WA próximamente',
+      telehealthLabel: 'Telesalud', telehealthValue: 'Disponible para pacientes en el Estado de Washington',
+      faxLabel: 'Fax', availTitle: 'Disponibilidad',
+      availP1: 'Por favor comuníquese por teléfono o correo electrónico para consultas de programación. Generalmente respondo dentro de 1 a 2 días hábiles. Para preguntas no urgentes, el formulario de solicitud de cita es la mejor manera de contactarme.',
+      availP2: 'Esta práctica no puede brindar servicios de emergencia o crisis. Si está en crisis, llame o envíe un mensaje de texto al 988 (Línea de Crisis de Suicidio) o vaya a la sala de emergencias más cercana.',
+      mapPlaceholder: 'Mapa / foto de la oficina',
+    },
+    appointments: {
+      eyebrow: 'Nuevos pacientes', sectionTitle: 'Solicitar una cita',
+      sidebarTitle: 'Antes de comunicarse',
+      sidebarP1: 'Por favor complete este formulario para que pueda conocer un poco sobre usted antes de conectarnos. Revisaré su información y me pondré en contacto en pocos días hábiles.',
+      sidebarP2: 'Este formulario es solo para consultas de nuevos pacientes. Los pacientes existentes deben contactarme directamente por teléfono o correo electrónico.',
+      noteStrong: 'Práctica de pago directo.', noteBody: 'No facturo directamente al seguro, pero proporciono superbills para reembolso fuera de red. Consulte las preguntas frecuentes para más detalles.',
+      receivedTitle: 'Solicitud recibida', receivedBody: 'Gracias — me pondré en contacto en pocos días hábiles.',
+      thankYou: 'Gracias.',
+      thankYouBody: 'Su solicitud ha sido recibida. Revisaré su información y me comunicaré en pocos días hábiles para discutir los próximos pasos.',
+      personalTitle: 'Información personal',
+      firstNameLabel: 'Nombre', lastNameLabel: 'Apellido', phoneLabel: 'Teléfono', emailLabel: 'Correo electrónico',
+      preferredContactLabel: 'Contacto preferido', emailOpt: 'Correo electrónico', phoneOpt: 'Teléfono', eitherOpt: 'Cualquiera',
+      apptTitle: 'Detalles de la cita', visitPrefLabel: 'Preferencia de visita',
+      selectOpt: 'Seleccionar…', inPersonOpt: 'En persona', telehealthOpt: 'Telesalud (solo Estado de Washington)', noPrefOpt: 'Sin preferencia',
+      clinicalTitle: '¿Qué le trae aquí?',
+      concernLabel: 'Por favor describa brevemente sus principales preocupaciones *',
+      concernPlaceholder: 'Por favor describa lo que espera abordar…',
+      furtherDetails: 'Se solicitarán más detalles sobre su historial, medicamentos actuales y tratamiento previo antes de su primera cita.',
+      ackTitle: 'Reconocimientos',
+      ack1: 'Entiendo que esta es una práctica de pago directo y seré responsable del pago en el momento del servicio. Se proporcionarán superbills para reembolso de seguro.',
+      ack2: 'Tengo 18 años de edad o más.',
+      submitNote: 'Enviar este formulario no garantiza una cita. Revisaré su información y me pondré en contacto en pocos días hábiles para confirmar disponibilidad.',
+      submitBtn: 'Enviar solicitud',
+    },
+    footer: {
+      specialty: 'Psiquiatría de adultos · Manejo de medicamentos', state: 'Estado de Washington', mode: 'En persona y Telesalud',
+      navigate: 'Navegar', contact: 'Contacto',
+      crisis: 'Si está en crisis, llame o envíe un mensaje al 988 (Línea de Crisis) o vaya a la sala de emergencias más cercana.',
+      copyright: '© 2026 Daniel Giovinazzo, MD PhD, PLLC. Todos los derechos reservados.',
+      privacy: 'Este sitio no recopila ni almacena información de salud personal.',
+      navLabels: { home:'Inicio', about:'Sobre mí', services:'Servicios', faq:'Preguntas', contact:'Contacto', appointments:'Solicitar cita' },
+    },
+  },
+};
+
+const FAQ_DATA_ES = [
+  { q: '¿Acepta seguros?', a: 'Mi práctica es de pago directo y no factura seguros directamente. Sin embargo, proporciono superbills detallados (recibos con códigos de diagnóstico y procedimiento) que puede enviar a su aseguradora para un posible reembolso fuera de red. Muchos pacientes con planes PPO reciben reembolso parcial.' },
+  { q: '¿Qué es un superbill y cómo lo uso?', a: 'Un superbill es un recibo detallado que incluye toda la información que su aseguradora necesita para procesar un reclamo de reembolso: mi número NPI, códigos de diagnóstico (ICD-10), códigos de procedimiento (CPT) y detalles de la sesión. Usted lo envía directamente a su aseguradora después de cada visita.' },
+  { q: '¿Ofrece citas de telesalud?', a: 'Sí — ofrezco citas en persona y por telesalud para pacientes ubicados en el Estado de Washington. Las visitas de telesalud se realizan a través de una plataforma de video compatible con HIPAA.' },
+  { q: '¿A quién atiende?', a: 'Atiendo adultos (mayores de 18 años) que buscan manejo de medicamentos psiquiátricos. Trabajo con una variedad de condiciones incluyendo depresión, ansiedad, trastorno bipolar, TDAH, TOC, PTSD y otras.' },
+  { q: '¿Qué puedo esperar en mi primera cita?', a: 'La cita inicial dura 1.5 horas. Dedicaremos tiempo a conocernos: le preguntaré sobre su historia, síntomas actuales, experiencias de tratamiento previas, su contexto de vida y sus objetivos. Al final, busco tener un diagnóstico de trabajo y un plan de tratamiento desarrollado juntos.' },
+  { q: '¿Ofrece terapia?', a: 'Mi práctica se enfoca en el manejo de medicamentos psiquiátricos y no ofrezco psicoterapia formal. Sin embargo, creo firmemente en un enfoque colaborativo y trabajaré con usted para identificar opciones de terapia apropiadas y puedo coordinar la atención con su terapeuta actual.' },
+  { q: '¿Qué es una consulta de segunda opinión?', a: 'Una consulta de segunda opinión es una visita única para la aclaración diagnóstica o para obtener otra perspectiva sobre su plan de tratamiento actual. Esta visita no establece una relación de tratamiento continuo.' },
+  { q: '¿Cuál es su política sobre el papeleo de FMLA o incapacidad laboral?', a: 'Consideraré completar el papeleo de FMLA o incapacidad de corto plazo si tiene sentido como parte de su plan de tratamiento general y después de una visita inicial exhaustiva.' },
+  { q: '¿Cómo se mantendrá mi confidencialidad?', a: 'Su privacidad es de suma importancia para mí. Todos los registros se mantienen en un sistema compatible con HIPAA. No reconoceré que usted es mi paciente ni me comunicaré con nadie sobre usted o su atención a menos que dé permiso escrito explícito. Las excepciones se limitan a las requeridas por ley, como situaciones que involucren preocupaciones de seguridad inmediata o denuncia obligatoria de abuso infantil o de adultos vulnerables.' },
+  { q: '¿Qué sucede si cancelo mi cita?', a: 'Entiendo que la vida sucede. Las cancelaciones realizadas con más de 24 horas de anticipación no tendrán cargo. Si se enferma o enfrenta una circunstancia imprevista, comuníquese antes de la hora de su cita y no se aplicará ningún cargo. Sin embargo, si no me notifica antes del inicio de su cita, se cobrará un cargo de $100.' },
+  { q: '¿Prescribe sustancias controladas?', a: 'Sí — prescribo sustancias controladas cuando está clínicamente indicado. Como todas las decisiones de tratamiento, esto se hace de manera reflexiva y colaborativa. Ciertas sustancias controladas (como estimulantes para el TDAH) pueden ser una parte importante de un plan de tratamiento integral. Cumplo con todas las regulaciones estatales y federales aplicables.' },
+  { q: '¿Cómo puedo comenzar?', a: 'Complete el formulario de solicitud de cita en este sitio. Revisaré su información y me pondré en contacto en pocos días hábiles. También puede comunicarse conmigo directamente por teléfono o correo electrónico.' },
+];
+
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+const FAQ_DATA = [
+  {
+    q: "Do you accept insurance?",
+    a: "My practice is cash-pay only and does not bill insurance directly. However, I provide detailed superbills (itemized receipts with diagnostic and procedure codes) that you can submit to your insurance company for potential out-of-network reimbursement. Many patients with PPO plans receive partial reimbursement this way."
+  },
+  {
+    q: "What is a superbill and how do I use it?",
+    a: "A superbill is an itemized receipt that includes all the information your insurance company needs to process a reimbursement claim: my NPI number, diagnosis codes (ICD-10), procedure codes (CPT), and session details. You submit it directly to your insurer after each visit. I recommend calling your insurance company beforehand to ask about your out-of-network mental health benefits."
+  },
+  {
+    q: "Do you offer telehealth appointments?",
+    a: "Yes — I offer both in-person and telehealth appointments for patients located in Washington State. Telehealth visits are conducted via a HIPAA-compliant video platform and work well for most medication management follow-ups."
+  },
+  {
+    q: "Who do you see?",
+    a: "I see adults (18 and older) seeking psychiatric medication management. I work with a range of conditions including depression, anxiety, bipolar disorder, ADHD, OCD, PTSD, and others."
+  },
+  {
+    q: "What can I expect at my first appointment?",
+    a: "The initial appointment is 1.5 hours long. We'll spend time getting to know each other — I'll ask about your history, current symptoms, prior treatment experiences, your life context, and your goals. By the end, I aim to have a working diagnosis and a treatment plan we've developed together, which may include medication, therapy referrals, or both."
+  },
+  {
+    q: "Do you provide therapy?",
+    a: "My practice is focused on psychiatric medication management and I do not offer formal psychotherapy. However, I strongly believe in a collaborative approach and will work with you to identify appropriate therapy options and therapists, and can coordinate care with your existing therapist."
+  },
+  {
+    q: "What is a second opinion consultation?",
+    a: "A second opinion consultation is a one-time visit for diagnostic clarification or to get another perspective on your current treatment plan. This is a good fit if you're uncertain about a diagnosis you've received, want to explore different medication options, or simply want a fresh set of eyes on your care."
+  },
+  {
+    q: "What is your policy regarding FMLA or short-term disability (STD) paperwork?",
+    a: "I will consider completing FMLA or short-term disability paperwork if it makes sense as part of your overall treatment plan and following a thorough initial visit. This ensures I have a comprehensive understanding of your situation before providing documentation."
+  },
+  {
+    q: "How will my confidentiality be maintained?",
+    a: "Your privacy is of the utmost importance to me. All records are maintained in a HIPAA-compliant system. I will not acknowledge that you are my patient or communicate with anyone about you or your care unless you provide explicit written permission for me to do so. Exceptions to confidentiality are limited to those required by law, such as situations involving imminent safety concerns or mandated reporting of child or vulnerable adult abuse."
+  },
+  {
+    q: "What happens if I cancel my appointment?",
+    a: "I understand that life happens and circumstances change. If you need to cancel, please let me know as soon as possible. Cancellations made more than 24 hours before your appointment will not incur any charge. If you become ill or face an unforeseen circumstance, please reach out before your appointment time and no fee will be applied. However, if you do not notify me prior to the start of your appointment, a $100 late cancellation/no-show fee will be charged."
+  },
+  {
+    q: "Do you prescribe controlled substances?",
+    a: "Yes — I prescribe controlled substances when clinically indicated. Like all treatment decisions, this is done thoughtfully and collaboratively, weighing the potential benefits against risks and alternatives. Certain controlled substances (such as stimulants for ADHD) can be an important and appropriate part of a comprehensive treatment plan. I follow all applicable state and federal regulations, including prescription monitoring requirements."
+  },
+  {
+    q: "How do I get started?",
+    a: "Fill out the appointment request form on this site. I'll review your information and reach out within a few business days to schedule. You can also reach me by phone or email directly."
+  }
+];
+
+// ─── COMPONENTS ──────────────────────────────────────────────────────────────
+
+function Nav({ page, setPage, dark, setDark, lang, setLang }) {
+  const toggleDark = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('pp_dark', next ? '1' : '0');
+  };
+  const toggleLang = () => {
+    const next = lang === 'en' ? 'es' : 'en';
+    setLang(next);
+    localStorage.setItem('pp_lang', next);
+  };
+  const t = CONTENT[lang].nav;
+  const links = [
+    { id: 'home', label: t.home },
+    { id: 'about', label: t.about },
+    { id: 'services', label: t.services },
+    { id: 'faq', label: t.faq },
+    { id: 'contact', label: t.contact },
+  ];
+  return (
+    <nav>
+      <div className="nav-logo" onClick={() => setPage('home')}>
+        Daniel Giovinazzo, MD PhD
+      </div>
+      <ul className="nav-links">
+        {links.map(l => (
+          <li key={l.id}>
+            <a className={page === l.id ? 'active' : ''}
+               onClick={() => setPage(l.id)}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+      <div className="nav-right">
+        <button className="dark-toggle" onClick={toggleLang} title={lang === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés'} style={{fontFamily:'var(--sans)',fontWeight:'500',fontSize:'0.75rem',letterSpacing:'0.08em',width:'auto',padding:'0 0.75rem'}}>
+          {lang === 'en' ? 'ES' : 'EN'}
+        </button>
+        <button className="dark-toggle" onClick={toggleDark} title={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {dark ? '☀' : '☾'}
+        </button>
+        <button className="nav-cta" onClick={() => setPage('appointments')}>
+          {t.cta}
+        </button>
+      </div>
+    </nav>
+  );
+}
+
+function HomePage({ setPage, lang }) {
+  const t = CONTENT[lang].home;
+  return (
+    <div className="page">
+      <section className="hero">
+        <div className="hero-left">
+          <p className="hero-eyebrow">{t.eyebrow}</p>
+          <h1 className="hero-title">{t.title}</h1>
+          <p className="hero-body">{t.body}</p>
+          <div className="hero-actions">
+            <button className="btn-primary" onClick={() => setPage('appointments')}>{t.cta}</button>
+            <button className="btn-ghost" onClick={() => setPage('about')}>{t.aboutBtn}</button>
+          </div>
+        </div>
+        <div className="hero-right">
+          <div className="hero-photo-placeholder"><p>Headshot photo</p></div>
+          <div className="hero-badges">
+            <div className="badge">{t.badge1}</div>
+            <div className="badge">{t.badge2}</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-features">
+        <div className="feature-card">
+          <h3 className="feature-title">{t.f1title}</h3>
+          <p className="feature-body">{t.f1body}</p>
+        </div>
+        <div className="feature-card">
+          <h3 className="feature-title">{t.f2title}</h3>
+          <p className="feature-body">{t.f2body}</p>
+        </div>
+        <div className="feature-card">
+          <h3 className="feature-title">{t.f3title}</h3>
+          <p className="feature-body">{t.f3body}</p>
+        </div>
+      </section>
+
+      <div className="home-notice" style={{flexWrap:'wrap',gap:'1rem'}}>
+        <span className="notice-label">{t.noticeLabel}</span>
+        <div className="notice-divider" />
+        <p className="notice-text">
+          {t.noticeText}
+          <a onClick={() => setPage('faq')} style={{color:'var(--terra)',cursor:'pointer',marginLeft:'0.4rem'}}>{t.learnMore}</a>
+        </p>
+      </div>
+      <div style={{background:'var(--terra)',padding:'0.9rem 6rem',display:'flex',alignItems:'center',gap:'1rem'}}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" strokeWidth="1.2"/><text x="8" y="12" textAnchor="middle" fill="white" fontSize="9" fontFamily="sans-serif">ES</text></svg>
+        <span style={{fontSize:'0.82rem',color:'white',letterSpacing:'0.04em'}}>{t.spanishBadge}</span>
+      </div>
+    </div>
+  );
+}
+
+function AboutPage({ lang }) {
+  const t = CONTENT[lang].about;
+  return (
+    <div className="page">
+      <div className="section-header">
+        <p className="section-eyebrow">{t.eyebrow}</p>
+        <h2 className="section-title">{t.sectionTitle}</h2>
+      </div>
+      <div className="about-grid">
+        <div className="about-photo-col"><div className="photo-placeholder"><p>Headshot photo</p></div></div>
+        <div className="about-bio-col">
+          <h3>{t.bgTitle}</h3>
+          <p>{t.p1}</p>
+          <p>{t.p2}</p>
+          <p>{t.p3}</p>
+          <p>{t.p4}{' '}
+            <a className="paper-link" href="uploads/giovinazzo-et-al-2021-hydrogen-sulfide-is-neuroprotective-in-alzheimer-s-disease-by-sulfhydrating-gsk3%CE%B2-and-inhibiting.pdf" target="_blank" rel="noopener noreferrer">{t.paperLink}</a>
+          </p>
+          <div className="about-creds">
+            {t.creds.map((c,i) => <span key={i} className="cred-tag">{c}</span>)}
+          </div>
+        </div>
+      </div>
+      <div className="philosophy-section">
+        <div className="philosophy-label"><h4>{t.philLabel}</h4></div>
+        <div className="philosophy-body">
+          <p>{t.phil1}</p><p>{t.phil2}</p><p>{t.phil3}</p><p>{t.phil4}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ServicesPage({ setPage, lang }) {
+  const t = CONTENT[lang].services;
+  return (
+    <div className="page">
+      <div className="section-header">
+        <p className="section-eyebrow">{t.eyebrow}</p>
+        <h2 className="section-title">{t.sectionTitle}</h2>
+        <p style={{marginTop:'1rem',fontSize:'0.82rem',color:'var(--terra)',letterSpacing:'0.04em'}}>{t.spanishNote}</p>
+      </div>
+      <div className="services-list">
+        <div className="service-row">
+          <div>
+            <h3 className="service-row-title">{t.s1title}</h3>
+            <span className="service-row-duration">{t.s1duration}</span>
+            <p className="service-row-body">{t.s1body}</p>
+          </div>
+          <div className="service-row-fee-col">
+            <span className="service-fee-label">{t.feeLabel}</span>
+            <div className="service-fee">TBD<small>{t.cashCard}</small></div>
+          </div>
+        </div>
+        <div className="service-row">
+          <div>
+            <h3 className="service-row-title">{t.s2title}</h3>
+            <span className="service-row-duration">{t.s2d1}</span>{'  '}
+            <span className="service-row-duration">{t.s2d2}</span>
+            <p className="service-row-body">{t.s2body}</p>
+          </div>
+          <div className="service-row-fee-col">
+            <span className="service-fee-label">{t.feeLabel}</span>
+            <div className="service-fee">TBD<small>{t.perSession}</small></div>
+          </div>
+        </div>
+        <div className="service-row">
+          <div>
+            <h3 className="service-row-title">{t.s3title}</h3>
+            <span className="service-row-duration">{t.s3duration}</span>
+            <p className="service-row-body">{t.s3body}</p>
+          </div>
+          <div className="service-row-fee-col">
+            <span className="service-fee-label">{t.feeLabel}</span>
+            <div className="service-fee">TBD<small>{t.oneTime}</small></div>
+          </div>
+        </div>
+      </div>
+      <div className="services-superbill">
+        <div className="superbill-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <rect x="3" y="1" width="14" height="20" rx="1" stroke="#FAF6F1" strokeWidth="1.2"/>
+            <line x1="6" y1="7" x2="14" y2="7" stroke="#FAF6F1" strokeWidth="1.2"/>
+            <line x1="6" y1="11" x2="14" y2="11" stroke="#FAF6F1" strokeWidth="1.2"/>
+            <line x1="6" y1="15" x2="11" y2="15" stroke="#FAF6F1" strokeWidth="1.2"/>
+          </svg>
+        </div>
+        <div><h4>{t.superbillTitle}</h4><p>{t.superbillBody}</p></div>
+      </div>
+    </div>
+  );
+}
+
+function FAQItem({ faq }) {
+  const [open, setOpen] = useState(false);
+  const answerRef = useRef(null);
+  return (
+    <div className={`faq-item ${open ? 'open' : ''}`} onClick={() => setOpen(o => !o)}>
+      <div className="faq-question">
+        <h3>{faq.q}</h3>
+        <div className="faq-toggle">{open ? '−' : '+'}</div>
+      </div>
+      <div className="faq-answer" style={{ maxHeight: open ? '400px' : '0' }}>
+        <div className="faq-answer-inner" ref={answerRef}>{faq.a}</div>
+      </div>
+    </div>
+  );
+}
+
+function FAQPage({ lang }) {
+  const t = CONTENT[lang].faq;
+  const data = lang === 'es' ? FAQ_DATA_ES : FAQ_DATA;
+  return (
+    <div className="page">
+      <div className="section-header">
+        <p className="section-eyebrow">{t.eyebrow}</p>
+        <h2 className="section-title">{t.sectionTitle}</h2>
+      </div>
+      <div className="faq-list" style={{ paddingTop: '2rem', paddingBottom: '5rem' }}>
+        {data.map((f, i) => <FAQItem key={i} faq={f} />)}
+      </div>
+    </div>
+  );
+}
+
+function ContactPage({ lang }) {
+  const t = CONTENT[lang].contact;
+  return (
+    <div className="page">
+      <div className="section-header">
+        <p className="section-eyebrow">{t.eyebrow}</p>
+        <h2 className="section-title">{t.sectionTitle}</h2>
+      </div>
+      <div className="contact-grid">
+        <div className="contact-info-col">
+          <h3>{t.infoTitle}</h3>
+          <div className="contact-item">
+            <div className="contact-item-label">{t.phoneLabel}</div>
+            <div className="contact-item-value"><a href="tel:3608599775">(360) 859-9775</a></div>
+          </div>
+          <div className="contact-item">
+            <div className="contact-item-label">{t.emailLabel}</div>
+            <div className="contact-item-value"><a href="mailto:dgiovinazzomd@gmail.com">dgiovinazzomd@gmail.com</a></div>
+          </div>
+          <div className="contact-item">
+            <div className="contact-item-label">{t.addressLabel}</div>
+            <div className="contact-item-value" style={{color:'var(--text-light)'}}>{t.addressValue}</div>
+          </div>
+          <div className="contact-item">
+            <div className="contact-item-label">{t.telehealthLabel}</div>
+            <div className="contact-item-value">{t.telehealthValue}</div>
+          </div>
+          <div className="contact-item">
+            <div className="contact-item-label">{t.faxLabel}</div>
+            <div className="contact-item-value">(360) 783-7362</div>
+          </div>
+        </div>
+        <div className="contact-map-col">
+          <div className="contact-map-placeholder"><p>{t.mapPlaceholder}</p></div>
+        </div>
+      </div>
+      <div className="contact-hours">
+        <h4>{t.availTitle}</h4>
+        <p className="hours-note">{t.availP1}<br /><br />{t.availP2}</p>
+      </div>
+    </div>
+  );
+}
+
+function AppointmentsPage({ lang }) {
+  const t = CONTENT[lang].appointments;
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({
+    firstName: '', lastName: '', phone: '', email: '',
+    preferredContact: 'email',
+    visitMode: '',
+    chiefConcern: '',
+    selfReferral: true, insuranceAware: false,
+  });
+
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const payload = {
+      access_key: '0f440583-5072-4351-87cb-a3397fbe41df',
+      subject: 'New Patient Appointment Request — ' + form.firstName + ' ' + form.lastName,
+      from_name: 'Giovinazzo Psychiatry Website',
+      'First Name': form.firstName,
+      'Last Name': form.lastName,
+      'Phone': form.phone,
+      'Email': form.email,
+      'Preferred Contact': form.preferredContact,
+      'Visit Preference': form.visitMode,
+      'Main Concerns': form.chiefConcern,
+      'Acknowledged Cash-Pay Policy': form.insuranceAware ? 'Yes' : 'No',
+      'Confirmed 18+': form.selfReferral ? 'Yes' : 'No',
+    };
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitted(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert('Something went wrong. Please try again or contact me directly.');
+      }
+    } catch (err) {
+      alert('Something went wrong. Please try again or contact me directly.');
+    }
+  };
+
+  return (
+    <div className="page">
+      <div className="section-header">
+        <p className="section-eyebrow">{t.eyebrow}</p>
+        <h2 className="section-title">{t.sectionTitle}</h2>
+      </div>
+      <div className="appt-grid">
+        <div className="appt-sidebar">
+          <h3>{t.sidebarTitle}</h3>
+          <p>{t.sidebarP1}</p>
+          <p>{t.sidebarP2}</p>
+          <div className="note-box">
+            <p><strong style={{color:'var(--text)'}}>{t.noteStrong}</strong> {t.noteBody}</p>
+          </div>
+          {submitted && (
+            <div className="submit-success visible" style={{marginTop:'2rem'}}>
+              <h4>{t.receivedTitle}</h4>
+              <p>{t.receivedBody}</p>
+            </div>
+          )}
+        </div>
+
+        <div className="appt-form-col">
+          {submitted ? (
+            <div style={{padding:'4rem 0', textAlign:'center'}}>
+              <p style={{fontFamily:'var(--serif)',fontSize:'2rem',fontWeight:'300',marginBottom:'1rem',color:'var(--terra)'}}>{t.thankYou}</p>
+              <p style={{color:'var(--text-mid)',fontSize:'0.95rem'}}>{t.thankYouBody}</p>
+            </div>
+          ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="form-section">
+              <div className="form-section-title">{t.personalTitle}</div>
+              <div className="form-row">
+                <div className="form-group"><label>{t.firstNameLabel} *</label><input required value={form.firstName} onChange={e => set('firstName', e.target.value)} /></div>
+                <div className="form-group"><label>{t.lastNameLabel} *</label><input required value={form.lastName} onChange={e => set('lastName', e.target.value)} /></div>
+              </div>
+              <div className="form-row">
+                <div className="form-group"><label>{t.phoneLabel} *</label><input type="tel" required value={form.phone} onChange={e => set('phone', e.target.value)} placeholder="(___) ___-____" /></div>
+                <div className="form-group"><label>{t.emailLabel} *</label><input type="email" required value={form.email} onChange={e => set('email', e.target.value)} placeholder="you@email.com" /></div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>{t.preferredContactLabel}</label>
+                  <select value={form.preferredContact} onChange={e => set('preferredContact', e.target.value)}>
+                    <option value="email">{t.emailOpt}</option>
+                    <option value="phone">{t.phoneOpt}</option>
+                    <option value="either">{t.eitherOpt}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="form-section">
+              <div className="form-section-title">{t.apptTitle}</div>
+              <div className="form-row single">
+                <div className="form-group">
+                  <label>{t.visitPrefLabel} *</label>
+                  <select required value={form.visitMode} onChange={e => set('visitMode', e.target.value)}>
+                    <option value="">{t.selectOpt}</option>
+                    <option value="inperson">{t.inPersonOpt}</option>
+                    <option value="telehealth">{t.telehealthOpt}</option>
+                    <option value="nopref">{t.noPrefOpt}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="form-section">
+              <div className="form-section-title">{t.clinicalTitle}</div>
+              <div className="form-row single">
+                <div className="form-group">
+                  <label>{t.concernLabel}</label>
+                  <textarea required value={form.chiefConcern} onChange={e => set('chiefConcern', e.target.value)} placeholder={t.concernPlaceholder} />
+                </div>
+              </div>
+              <p style={{fontSize:'0.83rem',color:'var(--text-light)',lineHeight:'1.7',marginTop:'0.5rem'}}>{t.furtherDetails}</p>
+            </div>
+            <div className="form-section">
+              <div className="form-section-title">{t.ackTitle}</div>
+              <div className="checkbox-group">
+                <label className="checkbox-item">
+                  <input type="checkbox" checked={form.insuranceAware} onChange={e => set('insuranceAware', e.target.checked)} />
+                  <label>{t.ack1}</label>
+                </label>
+                <label className="checkbox-item" style={{marginTop:'0.4rem'}}>
+                  <input type="checkbox" checked={form.selfReferral} onChange={e => set('selfReferral', e.target.checked)} />
+                  <label>{t.ack2}</label>
+                </label>
+              </div>
+            </div>
+            <div className="form-submit">
+              <p>{t.submitNote}</p>
+              <button type="submit" className="btn-primary" style={{fontSize:'0.85rem',letterSpacing:'0.08em'}}>{t.submitBtn}</button>
+            </div>
+          </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Footer({ setPage, lang }) {
+  const t = CONTENT[lang].footer;
+  return (
+    <>
+      <footer>
+        <div>
+          <h5>Daniel Giovinazzo, MD PhD</h5>
+          <p>{t.specialty}</p>
+          <p>{t.state}</p>
+          <p style={{marginTop:'1rem'}}>{t.mode}</p>
+        </div>
+        <div>
+          <h5>{t.navigate}</h5>
+          {['home','about','services','faq','contact','appointments'].map(p => (
+            <a key={p} onClick={() => setPage(p)} style={{cursor:'pointer'}}>
+              {t.navLabels[p]}
+            </a>
+          ))}
+        </div>
+        <div>
+          <h5>{t.contact}</h5>
+          <a href="tel:3608599775">(360) 859-9775</a>
+          <a href="mailto:dgiovinazzomd@gmail.com">dgiovinazzomd@gmail.com</a>
+          <p style={{marginTop:'1rem',fontSize:'0.78rem',lineHeight:'1.6'}}>{t.crisis}</p>
+        </div>
+      </footer>
+      <div className="footer-bottom">
+        <p>{t.copyright}</p>
+        <p>{t.privacy}</p>
+      </div>
+    </>
+  );
+}
+
+// ─── TWEAKS ──────────────────────────────────────────────────────────────────
+
+function TweaksPanel({ tweaks, setTweaks }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('message', (e) => {
+      if (e.data?.type === '__activate_edit_mode') setVisible(true);
+      if (e.data?.type === '__deactivate_edit_mode') setVisible(false);
+    });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+  }, []);
+
+  const update = (key, val) => {
+    const next = { ...tweaks, [key]: val };
+    setTweaks(next);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: next }, '*');
+    if (key === 'accentColor') {
+      const map = { terra: '#C9956A', sage: '#7A9E7E', slate: '#7A8FA8', mauve: '#9E7A8F' };
+      document.documentElement.style.setProperty('--terra', map[val]);
+      document.documentElement.style.setProperty('--terra-deep', val === 'terra' ? '#A8724A' : map[val]);
+    }
+    if (key === 'fontStyle') {
+      const heading = val === 'serif-modern' ? "'Cormorant Garamond', Georgia, serif"
+        : val === 'slab' ? "'Playfair Display', Georgia, serif"
+        : "'Helvetica Neue', Helvetica, sans-serif";
+      document.documentElement.style.setProperty('--serif', heading);
+    }
+  };
+
+  return (
+    <div className={`tweaks-panel ${visible ? 'visible' : ''}`}>
+      <h5>Tweaks</h5>
+      <div className="tweak-item">
+        <label>Heading style</label>
+        <select value={tweaks.fontStyle} onChange={e => update('fontStyle', e.target.value)}>
+          <option value="serif-modern">Cormorant (current)</option>
+          <option value="slab">Playfair Display</option>
+          <option value="sans">Sans-serif</option>
+        </select>
+      </div>
+      <div className="tweak-item">
+        <label>Accent color</label>
+        <select value={tweaks.accentColor} onChange={e => update('accentColor', e.target.value)}>
+          <option value="terra">Terracotta (current)</option>
+          <option value="sage">Sage green</option>
+          <option value="slate">Slate blue</option>
+          <option value="mauve">Mauve</option>
+        </select>
+      </div>
+    </div>
+  );
+}
+
+// ─── APP ─────────────────────────────────────────────────────────────────────
+
+function App() {
+  const [page, setPageRaw] = useState(() => {
+    return localStorage.getItem('pp_page') || 'home';
+  });
+  const [dark, setDark] = useState(() => {
+    const saved = localStorage.getItem('pp_dark');
+    const isDark = saved === '1';
+    document.documentElement.classList.toggle('dark', isDark);
+    return isDark;
+  });
+
+  const [lang, setLang] = useState(() => localStorage.getItem('pp_lang') || 'en');
+
+  const [tweaks, setTweaks] = useState(TWEAK_DEFAULTS);
+
+  const setPage = (p) => {
+    setPageRaw(p);
+    localStorage.setItem('pp_page', p);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const pages = { home: HomePage, about: AboutPage, services: ServicesPage, faq: FAQPage, contact: ContactPage, appointments: AppointmentsPage };
+  const PageComponent = pages[page] || HomePage;
+
+  return (
+    <>
+      <Nav page={page} setPage={setPage} dark={dark} setDark={setDark} lang={lang} setLang={setLang} />
+      <PageComponent setPage={setPage} lang={lang} />
+      <Footer setPage={setPage} lang={lang} />
+      <TweaksPanel tweaks={tweaks} setTweaks={setTweaks} />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
