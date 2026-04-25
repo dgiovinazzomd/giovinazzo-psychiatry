@@ -1159,7 +1159,7 @@ function Nav({ page, setPage, dark, setDark, lang, setLang }) {
   );
 }
 
-function HomePage({ setPage, lang }) {
+function HomePage({ setPage, lang, setLang }) {
   const t = CONTENT[lang].home;
   return (
     <div className="page">
@@ -1207,7 +1207,13 @@ function HomePage({ setPage, lang }) {
       </div>
       <div style={{background:'var(--terra)',padding:'0.9rem 6rem',display:'flex',alignItems:'center',gap:'1rem'}}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" strokeWidth="1.2"/><text x="8" y="12" textAnchor="middle" fill="white" fontSize="9" fontFamily="sans-serif">ES</text></svg>
-        <span style={{fontSize:'0.82rem',color:'white',letterSpacing:'0.04em'}}>{t.spanishBadge}</span>
+        <span style={{fontSize:'0.82rem',color:'white',letterSpacing:'0.04em'}}>
+          {lang === 'en' ? (
+            <><span style={{opacity:0.75}}>Services available in English · </span><a onClick={() => { setLang('es'); localStorage.setItem('pp_lang','es'); }} style={{color:'white',cursor:'pointer',textDecoration:'underline',textUnderlineOffset:'3px'}}>Servicios disponibles en español</a></>
+          ) : (
+            <><span style={{opacity:0.75}}>Servicios disponibles en español · </span><a onClick={() => { setLang('en'); localStorage.setItem('pp_lang','en'); }} style={{color:'white',cursor:'pointer',textDecoration:'underline',textUnderlineOffset:'3px'}}>Services available in English</a></>
+          )}
+        </span>
       </div>
     </div>
   );
@@ -1229,7 +1235,7 @@ function AboutPage({ lang }) {
           <p>{t.p2}</p>
           <p>{t.p3}</p>
           <p>{t.p4}{' '}
-            <a className="paper-link" href="uploads/giovinazzo-et-al-2021-hydrogen-sulfide-is-neuroprotective-in-alzheimer-s-disease-by-sulfhydrating-gsk3%CE%B2-and-inhibiting.pdf" target="_blank" rel="noopener noreferrer">{t.paperLink}</a>
+            <a className="paper-link" href="uploads/giovinazzo-alzheimers-paper.pdf" target="_blank" rel="noopener noreferrer">{t.paperLink}</a>
           </p>
           <div className="about-creds">
             {t.creds.map((c,i) => <span key={i} className="cred-tag">{c}</span>)}
@@ -1646,7 +1652,7 @@ function App() {
   return (
     <>
       <Nav page={page} setPage={setPage} dark={dark} setDark={setDark} lang={lang} setLang={setLang} />
-      <PageComponent setPage={setPage} lang={lang} />
+      <PageComponent setPage={setPage} lang={lang} setLang={setLang} />
       <Footer setPage={setPage} lang={lang} />
       <TweaksPanel tweaks={tweaks} setTweaks={setTweaks} />
     </>
