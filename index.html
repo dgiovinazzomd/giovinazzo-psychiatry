@@ -186,9 +186,10 @@
     .btn-ghost:hover { border-color: var(--terra); color: var(--terra); }
     .hero-right {
       background: var(--cream-mid);
-      display: flex; flex-direction: column; justify-content: flex-end;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
       overflow: hidden;
       position: relative;
+      padding: 3rem;
     }
     .hero-photo-placeholder {
       width: 100%; height: 100%;
@@ -535,11 +536,16 @@
     /* CONTACT */
     .contact-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.6fr 1fr;
     }
     .contact-info-col {
-      padding: 5rem 5rem 5rem 6rem;
-      border-right: 1px solid var(--tan);
+      padding: 5rem 6rem;
+    }
+    .contact-items-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem 4rem;
+      max-width: 760px;
     }
     .contact-info-col h3 {
       font-family: var(--serif);
@@ -547,8 +553,32 @@
       font-weight: 400;
       margin-bottom: 3rem;
     }
+    .contact-cta-col {
+      background: var(--cream-mid);
+      border-left: 1px solid var(--tan);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .contact-cta-col h4 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      width: 100%;
+    }
+    .contact-cta-col p {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
     .contact-item {
-      margin-bottom: 2.5rem;
+      margin-bottom: 0;
     }
     .contact-item-label {
       font-size: 0.72rem;
@@ -568,11 +598,6 @@
       background: var(--cream-mid);
       display: flex; align-items: center; justify-content: center;
       min-height: 400px;
-      background: repeating-linear-gradient(
-        45deg,
-        var(--cream-mid) 0px, var(--cream-mid) 12px,
-        var(--tan) 12px, var(--tan) 13px
-      );
     }
     .contact-map-placeholder {
       display: flex; flex-direction: column;
@@ -838,6 +863,7 @@
       .about-grid { grid-template-columns: 1fr; }
       .services-list .service-row { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 1rem; }
       .contact-grid { grid-template-columns: 1fr; }
+      .contact-cta-col { border-left: none; border-top: 1px solid var(--tan); padding: 3rem 1.5rem; }
       .appt-grid { grid-template-columns: 1fr; }
       .section-header, .faq-list, footer, .footer-bottom { padding-left: 1.5rem; padding-right: 1.5rem; }
       .contact-info-col { padding: 3rem 1.5rem; }
@@ -914,6 +940,9 @@ const CONTENT = {
       addressValue: 'Physical location in Kenmore, WA coming soon',
       telehealthLabel: 'Telehealth', telehealthValue: 'Available for patients in Washington State',
       faxLabel: 'Fax', availTitle: 'Availability',
+      telehealthPanelTitle: 'A fully telehealth practice',
+      telehealthPanelBody: 'I currently see all patients via secure, HIPAA-compliant video visits across Washington State. A physical location in Kenmore, WA is coming soon.',
+      ctaTitle: 'Ready to begin?', ctaBody: 'New patients can request an appointment using the secure intake form. I’ll review your information and follow up within a few business days.',
       availP1: 'Please reach out by phone or email for scheduling inquiries. I typically respond within 1–2 business days. For non-urgent questions, the appointment request form is the best way to get in touch.',
       availP2: 'This practice is not able to provide emergency or crisis services. If you are in crisis, please call or text 988 (Suicide & Crisis Lifeline) or go to your nearest emergency room.',
       mapPlaceholder: 'Map / office photo',
@@ -922,7 +951,7 @@ const CONTENT = {
       eyebrow: 'New Patients', sectionTitle: 'Request an appointment',
       sidebarTitle: 'Before you reach out',
       sidebarP1: "Please complete this form so I can learn a bit about you before we connect. I'll review your information and follow up within a few business days.",
-      sidebarP2: 'This form is for new patient inquiries only. Existing patients should contact me directly by phone or email.',
+      sidebarP2: 'This form is for new patient inquiries only. Existing patients should contact me directly via the Osmind patient portal.',
       noteStrong: 'Cash-pay practice.', noteBody: 'I do not bill insurance directly but provide superbills for out-of-network reimbursement. See the FAQ for details.',
       receivedTitle: 'Request received', receivedBody: "Thank you — I'll be in touch within a few business days.",
       thankYou: 'Thank you.',
@@ -943,7 +972,7 @@ const CONTENT = {
       submitBtn: 'Submit Request',
     },
     footer: {
-      specialty: 'Adult Psychiatry · Medication Management', state: 'Washington State', mode: 'In-person & Telehealth',
+      specialty: 'Adult Psychiatry · Medication Management', state: 'Washington State', mode: 'Telehealth now · In-person coming soon',
       navigate: 'Navigate', contact: 'Contact',
       crisis: 'If you are in crisis, please call or text 988 (Suicide & Crisis Lifeline) or go to your nearest emergency room.',
       copyright: '© 2026 Daniel Giovinazzo, MD PhD, PLLC. All rights reserved.',
@@ -1002,6 +1031,9 @@ const CONTENT = {
       addressValue: 'Ubicación física en Kenmore, WA próximamente',
       telehealthLabel: 'Telesalud', telehealthValue: 'Disponible para pacientes en el Estado de Washington',
       faxLabel: 'Fax', availTitle: 'Disponibilidad',
+      telehealthPanelTitle: 'Una práctica totalmente por telesalud',
+      telehealthPanelBody: 'Actualmente atiendo a todos los pacientes mediante videoconsultas seguras y compatibles con HIPAA en todo el Estado de Washington. Próximamente una ubicación física en Kenmore, WA.',
+      ctaTitle: '¿Listo para comenzar?', ctaBody: 'Los nuevos pacientes pueden solicitar una cita usando el formulario seguro. Revisaré su información y me pondré en contacto en pocos días hábiles.',
       availP1: 'Por favor comuníquese por teléfono o correo electrónico para consultas de programación. Generalmente respondo dentro de 1 a 2 días hábiles. Para preguntas no urgentes, el formulario de solicitud de cita es la mejor manera de contactarme.',
       availP2: 'Esta práctica no puede brindar servicios de emergencia o crisis. Si está en crisis, llame o envíe un mensaje de texto al 988 (Línea de Crisis de Suicidio) o vaya a la sala de emergencias más cercana.',
       mapPlaceholder: 'Mapa / foto de la oficina',
@@ -1010,7 +1042,7 @@ const CONTENT = {
       eyebrow: 'Nuevos pacientes', sectionTitle: 'Solicitar una cita',
       sidebarTitle: 'Antes de comunicarse',
       sidebarP1: 'Por favor complete este formulario para que pueda conocer un poco sobre usted antes de conectarnos. Revisaré su información y me pondré en contacto en pocos días hábiles.',
-      sidebarP2: 'Este formulario es solo para consultas de nuevos pacientes. Los pacientes existentes deben contactarme directamente por teléfono o correo electrónico.',
+      sidebarP2: 'Este formulario es solo para consultas de nuevos pacientes. Los pacientes existentes deben contactarme directamente a través del portal de pacientes Osmind.',
       noteStrong: 'Práctica de pago directo.', noteBody: 'No facturo directamente al seguro, pero proporciono superbills para reembolso fuera de red. Consulte las preguntas frecuentes para más detalles.',
       receivedTitle: 'Solicitud recibida', receivedBody: 'Gracias — me pondré en contacto en pocos días hábiles.',
       thankYou: 'Gracias.',
@@ -1031,7 +1063,7 @@ const CONTENT = {
       submitBtn: 'Enviar solicitud',
     },
     footer: {
-      specialty: 'Psiquiatría de adultos · Manejo de medicamentos', state: 'Estado de Washington', mode: 'En persona y Telesalud',
+      specialty: 'Psiquiatría de adultos · Manejo de medicamentos', state: 'Estado de Washington', mode: 'Telesalud ahora · En persona próximamente',
       navigate: 'Navegar', contact: 'Contacto',
       crisis: 'Si está en crisis, llame o envíe un mensaje al 988 (Línea de Crisis) o vaya a la sala de emergencias más cercana.',
       copyright: '© 2026 Daniel Giovinazzo, MD PhD, PLLC. Todos los derechos reservados.',
@@ -1044,7 +1076,7 @@ const CONTENT = {
 const FAQ_DATA_ES = [
   { q: '¿Acepta seguros?', a: 'Mi práctica es de pago directo y no factura seguros directamente. Sin embargo, proporciono superbills detallados (recibos con códigos de diagnóstico y procedimiento) que puede enviar a su aseguradora para un posible reembolso fuera de red. Muchos pacientes con planes PPO reciben reembolso parcial.' },
   { q: '¿Qué es un superbill y cómo lo uso?', a: 'Un superbill es un recibo detallado que incluye toda la información que su aseguradora necesita para procesar un reclamo de reembolso: mi número NPI, códigos de diagnóstico (ICD-10), códigos de procedimiento (CPT) y detalles de la sesión. Usted lo envía directamente a su aseguradora después de cada visita.' },
-  { q: '¿Ofrece citas de telesalud?', a: 'Sí — ofrezco citas en persona y por telesalud para pacientes ubicados en el Estado de Washington. Las visitas de telesalud se realizan a través de una plataforma de video compatible con HIPAA.' },
+  { q: '¿Ofrece citas de telesalud?', a: 'Sí — actualmente ofrezco citas de telesalud para pacientes ubicados en cualquier lugar del Estado de Washington. Las visitas de telesalud se realizan a través de una plataforma de video segura y compatible con HIPAA, y funcionan bien para la mayoría de las citas de manejo de medicamentos. Las citas en persona en mi consultorio de Kenmore, WA estarán disponibles próximamente.' },
   { q: '¿A quién atiende?', a: 'Atiendo adultos (mayores de 18 años) que buscan manejo de medicamentos psiquiátricos. Trabajo con una variedad de condiciones incluyendo depresión, ansiedad, trastorno bipolar, TDAH, TOC, PTSD y otras.' },
   { q: '¿Qué puedo esperar en mi primera cita?', a: 'La cita inicial dura 1.5 horas. Dedicaremos tiempo a conocernos: le preguntaré sobre su historia, síntomas actuales, experiencias de tratamiento previas, su contexto de vida y sus objetivos. Al final, busco tener un diagnóstico de trabajo y un plan de tratamiento desarrollado juntos.' },
   { q: '¿Ofrece terapia?', a: 'Mi práctica se enfoca en el manejo de medicamentos psiquiátricos y no ofrezco psicoterapia formal. Sin embargo, creo firmemente en un enfoque colaborativo y trabajaré con usted para identificar opciones de terapia apropiadas y puedo coordinar la atención con su terapeuta actual.' },
@@ -1069,7 +1101,7 @@ const FAQ_DATA = [
   },
   {
     q: "Do you offer telehealth appointments?",
-    a: "Yes — I offer both in-person and telehealth appointments for patients located in Washington State. Telehealth visits are conducted via a HIPAA-compliant video platform and work well for most medication management follow-ups."
+    a: "Yes — I currently offer telehealth appointments for patients located anywhere in Washington State. Telehealth visits are conducted via a secure, HIPAA-compliant video platform and work well for most medication management appointments. In-person appointments at my Kenmore, WA location are coming soon."
   },
   {
     q: "Who do you see?",
@@ -1174,7 +1206,7 @@ function HomePage({ setPage, lang, setLang }) {
           </div>
         </div>
         <div className="hero-right">
-          <div className="hero-photo-placeholder"><p>Headshot photo</p></div>
+          <div className="hero-photo-placeholder" style={{width:'auto',height:'auto',background:'none',maxHeight:'96%'}}><img src="uploads/headshot_photo_home.jpg" alt="Daniel Giovinazzo, MD PhD" style={{maxWidth:'100%',maxHeight:'86vh',width:'auto',height:'auto',objectFit:'contain',boxShadow:'0 12px 40px rgba(61,35,22,0.18)'}} /></div>
           <div className="hero-badges">
             <div className="badge">{t.badge1}</div>
             <div className="badge">{t.badge2}</div>
@@ -1228,7 +1260,7 @@ function AboutPage({ lang }) {
         <h2 className="section-title">{t.sectionTitle}</h2>
       </div>
       <div className="about-grid">
-        <div className="about-photo-col"><div className="photo-placeholder"><p>Headshot photo</p></div></div>
+        <div className="about-photo-col"><img src="uploads/wide_photo_about.jpg" alt="Daniel Giovinazzo, MD PhD" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center'}} /></div>
         <div className="about-bio-col">
           <h3>{t.bgTitle}</h3>
           <p>{t.p1}</p>
@@ -1270,7 +1302,7 @@ function ServicesPage({ setPage, lang }) {
           </div>
           <div className="service-row-fee-col">
             <span className="service-fee-label">{t.feeLabel}</span>
-            <div className="service-fee">TBD<small>{t.cashCard}</small></div>
+            <div className="service-fee">$600<small>{t.cashCard}</small></div>
           </div>
         </div>
         <div className="service-row">
@@ -1282,7 +1314,8 @@ function ServicesPage({ setPage, lang }) {
           </div>
           <div className="service-row-fee-col">
             <span className="service-fee-label">{t.feeLabel}</span>
-            <div className="service-fee">TBD<small>{t.perSession}</small></div>
+            <div className="service-fee">$265<small>25 min</small></div>
+            <div className="service-fee" style={{marginTop:'0.75rem'}}>$475<small>55 min</small></div>
           </div>
         </div>
         <div className="service-row">
@@ -1293,7 +1326,7 @@ function ServicesPage({ setPage, lang }) {
           </div>
           <div className="service-row-fee-col">
             <span className="service-fee-label">{t.feeLabel}</span>
-            <div className="service-fee">TBD<small>{t.oneTime}</small></div>
+            <div className="service-fee">$800<small>{t.oneTime}</small></div>
           </div>
         </div>
       </div>
@@ -1344,7 +1377,7 @@ function FAQPage({ lang }) {
   );
 }
 
-function ContactPage({ lang }) {
+function ContactPage({ lang, setPage }) {
   const t = CONTENT[lang].contact;
   return (
     <div className="page">
@@ -1355,6 +1388,7 @@ function ContactPage({ lang }) {
       <div className="contact-grid">
         <div className="contact-info-col">
           <h3>{t.infoTitle}</h3>
+          <div className="contact-items-wrap">
           <div className="contact-item">
             <div className="contact-item-label">{t.phoneLabel}</div>
             <div className="contact-item-value"><a href="tel:3608599775">(360) 859-9775</a></div>
@@ -1375,9 +1409,12 @@ function ContactPage({ lang }) {
             <div className="contact-item-label">{t.faxLabel}</div>
             <div className="contact-item-value">(360) 783-7362</div>
           </div>
+          </div>
         </div>
-        <div className="contact-map-col">
-          <div className="contact-map-placeholder"><p>{t.mapPlaceholder}</p></div>
+        <div className="contact-cta-col">
+          <h4>{t.ctaTitle}</h4>
+          <p>{t.ctaBody}</p>
+          <button className="btn-primary" onClick={() => setPage('appointments')}>{CONTENT[lang].nav.cta}</button>
         </div>
       </div>
       <div className="contact-hours">
@@ -1396,7 +1433,7 @@ function AppointmentsPage({ lang }) {
     preferredContact: 'email',
     visitMode: '',
     chiefConcern: '',
-    selfReferral: true, insuranceAware: false,
+    selfReferral: false, insuranceAware: false,
   });
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
@@ -1412,8 +1449,6 @@ function AppointmentsPage({ lang }) {
       'Phone': form.phone,
       'Email': form.email,
       'Preferred Contact': form.preferredContact,
-      'Visit Preference': form.visitMode,
-      'Main Concerns': form.chiefConcern,
       'Acknowledged Cash-Pay Policy': form.insuranceAware ? 'Yes' : 'No',
       'Confirmed 18+': form.selfReferral ? 'Yes' : 'No',
     };
@@ -1485,30 +1520,6 @@ function AppointmentsPage({ lang }) {
                   </select>
                 </div>
               </div>
-            </div>
-            <div className="form-section">
-              <div className="form-section-title">{t.apptTitle}</div>
-              <div className="form-row single">
-                <div className="form-group">
-                  <label>{t.visitPrefLabel} *</label>
-                  <select required value={form.visitMode} onChange={e => set('visitMode', e.target.value)}>
-                    <option value="">{t.selectOpt}</option>
-                    <option value="inperson">{t.inPersonOpt}</option>
-                    <option value="telehealth">{t.telehealthOpt}</option>
-                    <option value="nopref">{t.noPrefOpt}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="form-section">
-              <div className="form-section-title">{t.clinicalTitle}</div>
-              <div className="form-row single">
-                <div className="form-group">
-                  <label>{t.concernLabel}</label>
-                  <textarea required value={form.chiefConcern} onChange={e => set('chiefConcern', e.target.value)} placeholder={t.concernPlaceholder} />
-                </div>
-              </div>
-              <p style={{fontSize:'0.83rem',color:'var(--text-light)',lineHeight:'1.7',marginTop:'0.5rem'}}>{t.furtherDetails}</p>
             </div>
             <div className="form-section">
               <div className="form-section-title">{t.ackTitle}</div>
