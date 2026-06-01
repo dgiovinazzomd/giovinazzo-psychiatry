@@ -900,7 +900,7 @@ const CONTENT = {
       f1title: 'Evidence-Based', f1body: 'Trained in neuroscience and medicine at Johns Hopkins, I bring a rigorous, research-informed approach to every treatment decision.',
       f2title: 'Patient-Centered', f2body: 'Your values, preferences, and life circumstances are central to any plan we develop together. This is a partnership.',
       f3title: 'Holistic', f3body: "Medication is one tool among many. When appropriate, I'll collaborate with therapists and help you find the right combination of care.",
-      noticeLabel: 'Cash-Pay Practice',
+      noticeLabel: 'Direct-Pay Practice',
       noticeText: 'This practice does not bill insurance directly. Detailed superbills are provided so you can seek out-of-network reimbursement from your insurer.',
       learnMore: 'Learn more →',
       spanishBadge: 'Services available in Spanish · Servicios disponibles en español',
@@ -931,7 +931,7 @@ const CONTENT = {
       s3body: "A single consultation for patients who are seeking clarity on a diagnosis, want another perspective on their current treatment, or are navigating a complex clinical picture. I'll review your history and provide an independent assessment and recommendations. This visit does not establish an ongoing treatment relationship but can be a valuable step in your care.",
       feeLabel: 'Fee', cashCard: 'Cash / card', perSession: 'Per session', oneTime: 'One-time',
       superbillTitle: 'Superbills provided for all visits',
-      superbillBody: 'This is a cash-pay practice. After each visit, I provide a detailed superbill with all necessary codes (ICD-10, CPT, NPI) so you can submit to your insurance company for potential out-of-network reimbursement. Many PPO plan holders receive partial reimbursement. Contact your insurer to learn about your out-of-network mental health benefits.',
+      superbillBody: 'This is a direct-pay practice. After each visit, I provide a detailed superbill with all necessary codes (ICD-10, CPT, NPI) so you can submit to your insurance company for potential out-of-network reimbursement. Many PPO plan holders receive partial reimbursement. Contact your insurer to learn about your out-of-network mental health benefits.',
     },
     faq: { eyebrow: 'FAQ', sectionTitle: 'Common questions' },
     contact: {
@@ -952,7 +952,7 @@ const CONTENT = {
       sidebarTitle: 'Before you reach out',
       sidebarP1: "Please complete this form so I can learn a bit about you before we connect. I'll review your information and follow up within a few business days.",
       sidebarP2: 'This form is for new patient inquiries only. Existing patients should contact me directly via the Osmind patient portal.',
-      noteStrong: 'Cash-pay practice.', noteBody: 'I do not bill insurance directly but provide superbills for out-of-network reimbursement. See the FAQ for details.',
+      noteStrong: 'Direct-pay practice.', noteBody: 'I do not bill insurance directly but provide superbills for out-of-network reimbursement. See the FAQ for details.',
       receivedTitle: 'Request received', receivedBody: "Thank you — I'll be in touch within a few business days.",
       thankYou: 'Thank you.',
       thankYouBody: "Your request has been received. I'll review your information and reach out within a few business days to discuss next steps.",
@@ -966,7 +966,7 @@ const CONTENT = {
       concernPlaceholder: "Please describe what you're hoping to address…",
       furtherDetails: 'Further details about your history, current medications, and prior treatment will be requested prior to your first appointment.',
       ackTitle: 'Acknowledgements',
-      ack1: 'I understand this is a cash-pay practice and I will be responsible for payment at the time of service. Superbills will be provided for insurance reimbursement.',
+      ack1: 'I understand this is a direct-pay practice and I will be responsible for payment at the time of service. Superbills will be provided for insurance reimbursement.',
       ack2: 'I am 18 years of age or older.',
       submitNote: 'Submitting this form does not guarantee an appointment. I will review your information and follow up within a few business days to confirm availability and next steps.',
       submitBtn: 'Submit Request',
@@ -1093,7 +1093,7 @@ const FAQ_DATA_ES = [
 const FAQ_DATA = [
   {
     q: "Do you accept insurance?",
-    a: "My practice is cash-pay only and does not bill insurance directly. However, I provide detailed superbills (itemized receipts with diagnostic and procedure codes) that you can submit to your insurance company for potential out-of-network reimbursement. Many patients with PPO plans receive partial reimbursement this way."
+    a: "My practice is direct-pay only and does not bill insurance directly. However, I provide detailed superbills (itemized receipts with diagnostic and procedure codes) that you can submit to your insurance company for potential out-of-network reimbursement. Many patients with PPO plans receive partial reimbursement this way."
   },
   {
     q: "What is a superbill and how do I use it?",
@@ -1449,7 +1449,7 @@ function AppointmentsPage({ lang }) {
       'Phone': form.phone,
       'Email': form.email,
       'Preferred Contact': form.preferredContact,
-      'Acknowledged Cash-Pay Policy': form.insuranceAware ? 'Yes' : 'No',
+      'Acknowledged Direct-Pay Policy': form.insuranceAware ? 'Yes' : 'No',
       'Confirmed 18+': form.selfReferral ? 'Yes' : 'No',
     };
     try {
