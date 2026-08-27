@@ -951,8 +951,9 @@ const CONTENT = {
     faq: { eyebrow: 'FAQ', sectionTitle: 'Common questions' },
     contact: {
       eyebrow: 'Contact', sectionTitle: 'Get in touch', infoTitle: 'Contact Information',
-      phoneLabel: 'Phone', emailLabel: 'Email', addressLabel: 'Address',
+      phoneLabel: 'Phone', emailLabel: 'Email', addressLabel: 'Clinic Address',
       addressValue: 'Physical location in Seattle, WA coming soon',
+      mailingLabel: 'Mailing Address', mailingValue: 'PO Box 82163\nKenmore, WA 98028-9998',
       telehealthLabel: 'Telehealth', telehealthValue: 'Available for patients in Washington State',
       faxLabel: 'Fax', availTitle: 'Availability',
       telehealthPanelTitle: 'A fully telehealth practice',
@@ -1048,8 +1049,9 @@ const CONTENT = {
     faq: { eyebrow: 'Preguntas frecuentes', sectionTitle: 'Preguntas comunes' },
     contact: {
       eyebrow: 'Contacto', sectionTitle: 'Póngase en contacto', infoTitle: 'Información de contacto',
-      phoneLabel: 'Teléfono', emailLabel: 'Correo electrónico', addressLabel: 'Dirección',
-      addressValue: 'Ubicación física en Seattle próximamente',
+      phoneLabel: 'Teléfono', emailLabel: 'Correo electrónico', addressLabel: 'Dirección de la clínica',
+      addressValue: 'Ubicación física en Seattle, WA próximamente',
+      mailingLabel: 'Dirección postal', mailingValue: 'PO Box 82163\nKenmore, WA 98028-9998',
       telehealthLabel: 'Telesalud', telehealthValue: 'Disponible para pacientes en el Estado de Washington',
       faxLabel: 'Fax', availTitle: 'Disponibilidad',
       telehealthPanelTitle: 'Una práctica totalmente por telesalud',
@@ -1419,7 +1421,7 @@ function ContactPage({ lang, setPage }) {
           <div className="contact-items-wrap">
           <div className="contact-item">
             <div className="contact-item-label">{t.phoneLabel}</div>
-            <div className="contact-item-value"><a href="tel:3608599775">(360) 859-9775</a></div>
+            <div className="contact-item-value"><a href="tel:4257807464">(425) 780-7464</a></div>
           </div>
           <div className="contact-item">
             <div className="contact-item-label">{t.emailLabel}</div>
@@ -1428,6 +1430,10 @@ function ContactPage({ lang, setPage }) {
           <div className="contact-item">
             <div className="contact-item-label">{t.addressLabel}</div>
             <div className="contact-item-value" style={{color:'var(--text-light)'}}>{t.addressValue}</div>
+          </div>
+          <div className="contact-item">
+            <div className="contact-item-label">{t.mailingLabel}</div>
+            <div className="contact-item-value" style={{whiteSpace:'pre-line'}}>{t.mailingValue}</div>
           </div>
           <div className="contact-item">
             <div className="contact-item-label">{t.telehealthLabel}</div>
@@ -1595,7 +1601,7 @@ function Footer({ setPage, lang }) {
         </div>
         <div>
           <h5>{t.contact}</h5>
-          <a href="tel:3608599775">(360) 859-9775</a>
+          <a href="tel:4257807464">(425) 780-7464</a>
           <a href="mailto:dgiovinazzomd@gmail.com">dgiovinazzomd@gmail.com</a>
           <p style={{marginTop:'1rem',fontSize:'0.78rem',lineHeight:'1.6'}}>{t.crisis}</p>
         </div>
