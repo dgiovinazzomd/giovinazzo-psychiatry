@@ -464,6 +464,15 @@
       margin-top: 0.15rem;
       font-family: var(--sans);
     }
+    .insurance-panel { padding: 3.5rem 6rem 3rem; display: grid; gap: 2rem; border-bottom: 1px solid var(--tan); }
+    .insurance-panel-label { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra); }
+    .insurance-panel h4 { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--text); }
+    .insurance-panel p { font-size: 0.9rem; line-height: 1.75; color: var(--text-light); }
+    .insurance-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .insurance-plans { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; }
+    .insurance-plans span { font-family: var(--serif); font-size: 1.05rem; color: var(--terra-deep); }
+    .fee-note { padding: 2.5rem 6rem 0; max-width: calc(60ch + 12rem); font-size: 0.82rem; line-height: 1.7; color: var(--text-light); font-family: var(--sans); }
+    @media (max-width: 768px) { .insurance-panel { padding: 2.5rem 1.5rem 2rem; } .fee-note { padding: 2rem 1.5rem 0; } .insurance-cols { grid-template-columns: 1fr; gap: 1.75rem; } }
     .services-superbill {
       background: var(--brown-dark);
       color: var(--cream);
@@ -929,7 +938,13 @@ const CONTENT = {
       s2body: "Follow-up visits focus on how you're responding to treatment — reviewing symptom changes, medication tolerability, and adjusting the plan as needed. I offer two session lengths to give you the flexibility to choose what works best for your needs and schedule. Both formats allow for meaningful conversation and thoughtful care.",
       s3title: 'Second Opinion Consultation', s3duration: '1.5 hours',
       s3body: "A single consultation for patients who are seeking clarity on a diagnosis, want another perspective on their current treatment, or are navigating a complex clinical picture. I'll review your history and provide an independent assessment and recommendations. This visit does not establish an ongoing treatment relationship but can be a valuable step in your care.",
-      feeLabel: 'Fee', cashCard: '90 min', perSession: 'Per session', oneTime: 'One-time 90 min',
+      insLabel: 'Insurance',
+      insCoveredTitle: 'Plans I accept',
+      insCoveredBody: 'I am contracted with Premera Blue Cross and LifeWise. If you are covered by one of these plans, I bill your insurer directly and you are responsible only for the copay, coinsurance, or deductible amount your plan sets.',
+      insDirectTitle: 'All other plans: direct pay',
+      insDirectBody: 'If you have any other insurance, this is a direct-pay practice. Payment is due at the time of service, and I provide a detailed superbill after each visit so you can seek out-of-network reimbursement from your insurer.',
+      feeNote: 'The fees below are direct-pay rates. They apply if you are not using Premera Blue Cross or LifeWise coverage — patients with those plans are billed through insurance instead.',
+      feeLabel: 'Direct-pay fee', cashCard: '90 min', perSession: 'Per session', oneTime: 'One-time 90 min',
       superbillTitle: 'Premera and LifeWise accepted · Superbills for all other plans',
       superbillBody: 'I accept Premera Blue Cross and LifeWise plans, and visits are billed directly to those insurers; the fees listed above apply to direct-pay patients. For all other insurance, this remains a direct-pay practice. After each visit, I provide a detailed superbill with all necessary codes (ICD-10, CPT, NPI) so you can submit to your insurance company for potential out-of-network reimbursement. Many PPO plan holders receive partial reimbursement. Contact your insurer to learn about your out-of-network mental health benefits.',
     },
@@ -1020,7 +1035,13 @@ const CONTENT = {
       s2body: 'Las visitas de seguimiento se enfocan en cómo está respondiendo al tratamiento: revisando cambios en síntomas, tolerancia a los medicamentos y ajustando el plan según sea necesario. Ofrezco dos duraciones de sesión para darle la flexibilidad de elegir lo que mejor funcione para sus necesidades y horario.',
       s3title: 'Consulta de segunda opinión', s3duration: '1.5 horas',
       s3body: 'Una consulta única para pacientes que buscan claridad sobre un diagnóstico, desean otra perspectiva sobre su tratamiento actual, o están navegando un cuadro clínico complejo. Revisaré su historial y proporcionaré una evaluación y recomendaciones independientes.',
-      feeLabel: 'Tarifa', cashCard: '90 min', perSession: 'Por sesión', oneTime: '90 min Única visita',
+      insLabel: 'Seguros',
+      insCoveredTitle: 'Planes que acepto',
+      insCoveredBody: 'Tengo contrato con Premera Blue Cross y LifeWise. Si tiene uno de estos planes, facturo directamente a su aseguradora y usted solo es responsable del copago, coseguro o deducible que establezca su plan.',
+      insDirectTitle: 'Todos los demás planes: pago directo',
+      insDirectBody: 'Si tiene otro seguro, esta es una práctica de pago directo. El pago se realiza en el momento del servicio y proporciono un superbill detallado después de cada visita para que pueda solicitar reembolso fuera de red de su aseguradora.',
+      feeNote: 'Las tarifas a continuación son de pago directo. Corresponden a quienes no utilizan cobertura de Premera Blue Cross o LifeWise; los pacientes con esos planes se facturan a través del seguro.',
+      feeLabel: 'Tarifa de pago directo', cashCard: '90 min', perSession: 'Por sesión', oneTime: '90 min Única visita',
       superbillTitle: 'Acepto Premera y LifeWise · Superbills para los demás planes',
       superbillBody: 'Acepto los planes de Premera Blue Cross y LifeWise, y facturo directamente a esas aseguradoras; las tarifas indicadas arriba corresponden a pacientes de pago directo. Para todos los demás seguros, esta sigue siendo una práctica de pago directo. Después de cada visita, proporciono un superbill detallado con todos los códigos necesarios (ICD-10, CPT, NPI) para que pueda enviarlo a su aseguradora y solicitar reembolso fuera de red.',
     },
@@ -1293,6 +1314,21 @@ function ServicesPage({ setPage, lang }) {
         <h2 className="section-title">{t.sectionTitle}</h2>
         <p style={{marginTop:'1rem',fontSize:'0.82rem',color:'var(--terra)',letterSpacing:'0.04em'}}>{t.spanishNote}</p>
       </div>
+      <div className="insurance-panel">
+        <p className="insurance-panel-label">{t.insLabel}</p>
+        <div className="insurance-cols">
+          <div>
+            <h4>{t.insCoveredTitle}</h4>
+            <p>{t.insCoveredBody}</p>
+            <div className="insurance-plans"><span>Premera Blue Cross</span><span>LifeWise</span></div>
+          </div>
+          <div>
+            <h4>{t.insDirectTitle}</h4>
+            <p>{t.insDirectBody}</p>
+          </div>
+        </div>
+      </div>
+      <p className="fee-note">{t.feeNote}</p>
       <div className="services-list">
         <div className="service-row">
           <div>
@@ -1331,14 +1367,6 @@ function ServicesPage({ setPage, lang }) {
         </div>
       </div>
       <div className="services-superbill">
-        <div className="superbill-icon">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <rect x="3" y="1" width="14" height="20" rx="1" stroke="#FAF6F1" strokeWidth="1.2"/>
-            <line x1="6" y1="7" x2="14" y2="7" stroke="#FAF6F1" strokeWidth="1.2"/>
-            <line x1="6" y1="11" x2="14" y2="11" stroke="#FAF6F1" strokeWidth="1.2"/>
-            <line x1="6" y1="15" x2="11" y2="15" stroke="#FAF6F1" strokeWidth="1.2"/>
-          </svg>
-        </div>
         <div><h4>{t.superbillTitle}</h4><p>{t.superbillBody}</p></div>
       </div>
     </div>
